@@ -1,4 +1,4 @@
-package com.oguzhan.petclinic.controller;
+package com.oguzhan.petclinic.web;
 
 import com.oguzhan.petclinic.service.PetClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
