@@ -32,12 +32,12 @@
         </dependency>
 
         <dependency><!-- Değişikliğe uğramış sınıf ve resourceleri restart eder. tarayıcı yenilenmesi vs. -->
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
+            <groupId>org.springframework.boot</groupId><!-- File->Setting –> Build, Execution, Deployment –> Compiler–>Build project automatically is selected.-->
+            <artifactId>spring-boot-devtools</artifactId><!-- Ctrl + Shift + A -> registry -> compiler.automake.allow.when.app.running checked.-->
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-        <dependency>
+        <dependency><!--Anatasyonlar ile getter, setter vs .. -->
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
