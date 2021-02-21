@@ -9,7 +9,7 @@ public interface PetClinicService {
 
     List<Owner> findOwners();
 
-    List<Owner> findOwners(String lasName);
+    List<Owner> findOwners(String lastName);
 
     Owner findOwner(Long id) throws OwnerNotFoundException;
 
