@@ -18,7 +18,7 @@ public class OwnerRepositoryImpl implements OwnerRepository {
         Owner owner1 = new Owner();
         owner1.setId(1L);
         owner1.setFirstName("Oğuzhan");
-        owner1.setLastName("Bektaş");
+        owner1.setLastName("Bektas");
 
         Owner owner2 = new Owner();
         owner2.setId(2L);
@@ -35,10 +35,16 @@ public class OwnerRepositoryImpl implements OwnerRepository {
         owner4.setFirstName("Eray");
         owner4.setLastName("Demir");
 
+        Owner owner5 = new Owner();
+        owner5.setId(5L);
+        owner5.setFirstName("Dilara");
+        owner5.setLastName("Bektas");
+
         ownersMap.put(owner1.getId(), owner1);
         ownersMap.put(owner2.getId(), owner2);
         ownersMap.put(owner3.getId(), owner3);
         ownersMap.put(owner4.getId(), owner4);
+        ownersMap.put(owner5.getId(), owner5);
     }
 
     @Override
