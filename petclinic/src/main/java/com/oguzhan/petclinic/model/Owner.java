@@ -1,5 +1,6 @@
 package com.oguzhan.petclinic.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.HashSet;
@@ -12,5 +13,6 @@ public class Owner {
     private String firstName;
     private String lastName;
 
+    @JsonIgnore
     private Set<Pet> pets = new HashSet<>();
 }
