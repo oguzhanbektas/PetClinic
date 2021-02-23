@@ -1,12 +1,16 @@
 package com.oguzhan.petclinic.web;
 
+import com.oguzhan.petclinic.exception.InternalServerException;
 import com.oguzhan.petclinic.exception.OwnerNotFoundException;
 import com.oguzhan.petclinic.model.Owner;
 import com.oguzhan.petclinic.service.PetClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -40,6 +44,43 @@ public class PetClinicRestController {
             return ResponseEntity.ok(owner);
         } catch (OwnerNotFoundException e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/owner")
+    public ResponseEntity<URI> createOwner(@RequestBody Owner owner) {
+        try {
+            petClinicService.createOwner(owner);
+            Long id = owner.getId();
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
+            return ResponseEntity.created(location).build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/owner/{id}")
+    public ResponseEntity<?> updateOwner(@PathVariable Long id, @RequestBody Owner ownerRequest) {
+        try {
+            Owner owner = petClinicService.findOwner(id);
+            owner.setFirstName(ownerRequest.getFirstName());
+            owner.setLastName(ownerRequest.getLastName());
+            petClinicService.updateOwner(owner);
+            return ResponseEntity.ok().build();
+        } catch (OwnerNotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/owner/{id}")
+    public ResponseEntity<?> deleteOwner(@PathVariable("id") Long id) {
+        try {
+            petClinicService.deleteOwner(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            throw new InternalServerException(ex);
         }
     }
 }
